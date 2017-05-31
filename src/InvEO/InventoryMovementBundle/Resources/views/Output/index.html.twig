@@ -1,0 +1,43 @@
+{% extends 'CoreBundle:Templates:base.html.twig' %}
+
+{% block title %}Lista de salidas{% endblock %}
+
+{% block titleMain %}Lista de salidas{% endblock %}
+
+{% block position %}
+
+    {% include 'CoreBundle:Templates:position.html.twig' with {
+    positions : [
+        {
+            title : 'Salidas',
+            route : '',
+            icon  : icon.ICON_OUTPUT
+        }
+    ]
+    } %}
+
+{% endblock %}
+
+{% block body %}
+
+    {% include 'CoreBundle:Templates:summary.html.twig' with {
+        data : outputs,
+        editButton : {
+            icon : icon.ICON_EDIT,
+            route : 'output.edit',
+            hide : {
+                property : 'status',
+                value : 1
+            }
+        },
+        showButton : {
+            icon : icon.ICON_SEARCH,
+            route : 'output.show'
+        },
+        fields : [
+            {label : 'Código', key : 'code'},
+            {label : 'Fecha', key : 'dateIssue'},
+            {label : 'Cliente', key : 'clientName'},
+        ]
+    } %}
+{% endblock %}

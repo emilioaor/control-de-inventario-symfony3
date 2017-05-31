@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    {% block meta %}{% endblock %}
+    <title>{% block title %}Agrega un block "title"{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('assetics/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assetics/css/styles.css') }}">
+    {% block css %}{% endblock %}
+</head>
+<body>
+    <header id="header">
+        <div class="container-fluid">
+            <h1>InvEO <small>1.0</small></h1>
+        </div>
+    </header>
+
+
+    <section id="main">
+
+        <div class="container-fluid">
+            <div class="row">
+
+                <nav id="menu" class="col-md-3">
+                    {% include 'CoreBundle:Templates:nav.html.twig' %}
+                </nav>
+
+                <section id="content" class="col-md-9">
+                    <div class="container-fluid">
+
+                        {% if alert.hasAlert() %}
+                            <div class="alert {{ alert.getAlertTypeAndRemove }} alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                {{ alert.getAlertMessageAndRemove|raw }}
+                            </div>
+                        {% endif %}
+
+                        {% block position %}
+
+                            {% include 'CoreBundle:Templates:position.html.twig' with {
+                                positions : [
+                                    {
+                                        title : 'Dashboard',
+                                        route : '',
+                                        icon  : icon.ICON_HOME
+                                    }
+                                ]
+                            } %}
+
+                        {% endblock %}
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h2 id="title-main">{% block titleMain %}Agrega un block "titleMain"{% endblock %}</h2>
+                            </div>
+                        </div>
+
+                        {% block body %}{% endblock %}
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+    </section>
+
+
+    <script src="{{ asset('assetics/js/jquery.js') }}"></script>
+    <script src="{{ asset('assetics/js/bootstrap.min.js') }}"></script>
+    {% block js %}{% endblock %}
+</body>
+</html>

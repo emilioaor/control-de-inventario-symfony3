@@ -1,0 +1,28 @@
+{#
+    Imprime la ubicacion actual en el sistema
+    pasa un array "positions" con las rutas
+    Ejemplo:
+
+    positions : [
+            {
+                title : 'titulo1',
+                route : 'ruta1', //o vacio
+                icon  : 'clase icono'
+            },
+            {
+                title : 'titulo2',
+                route : 'ruta2',
+                icon  : 'clase icono'
+            }
+            ...
+        ]
+#}
+<p>
+    {% for position in positions %}
+        {% if position.route is defined and position.route != ''  %}
+            <a href="{{ url(position.route) }}"><span class="{{ position.icon|default('') }}"></span> {{ position.title }}</a> &nbsp;/ &nbsp;
+        {% else %}
+            <span class="{{ position.icon|default('') }}"></span> {{ position.title }}
+        {% endif %}
+    {% endfor %}
+</p>

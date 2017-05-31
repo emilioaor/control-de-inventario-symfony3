@@ -1,0 +1,78 @@
+{% extends 'CoreBundle:Templates:base.html.twig' %}
+
+{% block title %}{{ client.name }}{% endblock %}
+
+{% block titleMain %}{{ client.name }}{% endblock %}
+
+{% block position %}
+
+    {% include 'CoreBundle:Templates:position.html.twig' with {
+        positions : [
+            {
+                title : 'Clientes',
+                route : 'client.index',
+                icon  : icon.ICON_CLIENT
+            },
+            {
+                title : client.name,
+                route : '',
+                icon  : icon.ICON_CLIENT
+            }
+        ]
+    } %}
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+
+        <div class="col-sm-4 form-group">
+
+            <label>Código</label>
+            <p>{{ client.code }}</p>
+        </div>
+
+        <div class="col-sm-4 form-group">
+
+            <label>Rif</label>
+            <p>{{ client.rif }}</p>
+        </div>
+
+        <div class="col-sm-4 form-group">
+
+            <label>Nombre</label>
+            <p>{{ client.name }}</p>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-4 form-group">
+
+            <label>Teléfono</label>
+            <p>{{ client.phone }}</p>
+        </div>
+
+        <div class="col-sm-4 form-group">
+
+            <label>Celular</label>
+            <p>{{ client.mobile }}</p>
+        </div>
+
+        <div class="col-sm-4 form-group">
+
+            <label>Dirección</label>
+            <p>{{ client.address }}</p>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 form-group">
+            <a href="{{ url('client.edit', {id : client.id}) }}" class="btn btn-warning"><span class="{{ icon.ICON_EDIT }}"></span> Editar</a>
+        </div>
+    </div>
+
+{% endblock %}

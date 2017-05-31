@@ -1,0 +1,136 @@
+{#
+    -- SummaryBuilder --
+    @autor Emilio Ochoa http://emilioochoa.com.ve
+
+    Constructor generico para vistas summary. Recibe los siguientes parametros
+
+    {
+        data : OBJETC con la data para el summary,
+
+        showButton : {
+            label : 'Etiqueta del boton',
+            icon  : 'Icono del boton',
+            route   : 'url a la que apunta',
+            show : {
+                property : 'Nombre de la propiedad a validar',
+                value : 'valor para mostrar'
+            },
+            hide : {
+                property : 'Nombre de la propiedad a validar',
+                value : 'valor para ocultar'
+            }
+        },
+
+        editButton : {
+            label : 'Etiqueta del boton',
+            icon  : 'Icono del boton',
+            route   : 'url a la que apunta',
+            show : {
+                property : 'Nombre de la propiedad a validar',
+                value : 'valor para mostrar'
+            },
+            hide : {
+                property : 'Nombre de la propiedad a validar',
+                value : 'valor para ocultar'
+            }
+        },
+
+        deleteButton : {
+            label : 'Etiqueta del boton',
+            icon  : 'Icono del boton',
+            route   : 'url a la que apunta',
+            show : {
+                property : 'Nombre de la propiedad a validar',
+                value : 'valor para mostrar'
+            },
+            hide : {
+                property : 'Nombre de la propiedad a validar',
+                value : 'valor para ocultar'
+            }
+        },
+
+        fields : [
+            {
+                label : Etiqueta para el campo,
+                key   : Key del campo en data
+            },
+
+            {
+                label : Etiqueta para el campo,
+                key   : Key del campo en data
+            },
+
+            ...
+        ]
+    }
+#}
+<table class="table table-striped table-responsive">
+    <thead>
+        <tr>
+            {# Imprime los valores definidos en fields #}
+            {% for field in fields %}
+                <th>{{ field.label }}</th>
+            {% endfor %}
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for row in data  %}
+        <tr>
+            {% for field in fields %}
+                <td>{{ attribute(row, field.key)|objectToString }}</td>
+            {% endfor %}
+            <td>
+                {# Boton SHOW #}
+                {% if showButton is defined %}
+                    {# Verifica si esta definido el boton #}
+
+                    {% if not showButton.show is defined or attribute(row, showButton.show.property) == showButton.show.value  %}
+                        {# Verifica si posee regla para show y si cumple con la misma #}
+
+                        {% if not showButton.hide is defined or attribute(row, showButton.hide.property) != showButton.hide.value  %}
+                            {# Verifica si posee regla para hide y si cumple con la misma #}
+
+                            <a href="{{ url(showButton.route, {id : row.id}) }}" class="btn btn-primary"><span class="{{ showButton.icon|default('') }}"></span> {{ showButton.label|default('') }}</a>
+                        {% endif %}
+                    {% endif %}
+
+                {% endif %}
+
+                {# Boton EDIT #}
+                {% if editButton is defined %}
+                    {# Verifica si esta definido el boton #}
+
+                    {% if not editButton.show is defined or attribute(row, editButton.show.property) == editButton.show.value  %}
+                        {# Verifica si posee regla para show y si cumple con la misma #}
+
+                        {% if not editButton.hide is defined or attribute(row, editButton.hide.property) != editButton.hide.value  %}
+                            {# Verifica si posee regla para hide y si cumple con la misma #}
+
+                            <a href="{{ url(editButton.route, {id : row.id}) }}" class="btn btn-warning"><span class="{{ editButton.icon|default('') }}"></span> {{ editButton.label|default('') }}</a>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+
+                {# Boton DELETE #}
+                {% if deleteButton is defined %}
+                    {# Verifica si esta definido el boton #}
+
+                    {% if not deleteButton.show is defined or attribute(row, deleteButton.show.property) == deleteButton.show.value  %}
+                        {# Verifica si posee regla para show y si cumple con la misma #}
+
+                        {% if not deleteButton.hide is defined or attribute(row, deleteButton.hide.property) != deleteButton.hide.value  %}
+                            {# Verifica si posee regla para hide y si cumple con la misma #}
+
+                            <a href="{{ url(deleteButton.route, {id : row.id}) }}" class="btn btn-danger"><span class="{{ deleteButton.icon|default('') }}"></span> {{ deleteButton.label|default('') }}</a>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% if data|length == 0 %}
+    <p>Sin resultados</p>
+{% endif %}

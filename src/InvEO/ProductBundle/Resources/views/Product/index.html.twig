@@ -1,0 +1,39 @@
+{% extends 'CoreBundle:Templates:base.html.twig' %}
+
+{% block title %}Lista de productos{% endblock %}
+
+{% block titleMain %}Lista de productos{% endblock %}
+
+{% block position %}
+
+    {% include 'CoreBundle:Templates:position.html.twig' with {
+        positions : [
+            {
+                title : 'Productos',
+                route : '',
+                icon  : icon.ICON_PRODUCT
+            }
+        ]
+    } %}
+
+{% endblock %}
+
+{% block body %}
+
+    {% include 'CoreBundle:Templates:summary.html.twig' with {
+        data : products,
+        editButton : {
+            icon : icon.ICON_EDIT,
+            route : 'product.edit'
+        },
+        showButton : {
+            icon : icon.ICON_SEARCH,
+            route : 'product.show'
+        },
+        fields : [
+            {label : 'Código', key : 'code'},
+            {label : 'Nombre', key : 'name'},
+            {label : 'Stock', key : 'stock'}
+        ]
+    } %}
+{% endblock %}

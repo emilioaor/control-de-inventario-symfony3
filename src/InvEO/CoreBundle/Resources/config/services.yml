@@ -1,0 +1,15 @@
+services:
+    #iconos
+    inveo.core.model.icons.icon:
+      class: InvEO\CoreBundle\Model\Icons\Icon
+
+    #alertas
+    inveo.core.model.alert.alert:
+      class: InvEO\CoreBundle\Model\Alert\Alert
+
+    #filtros
+    inveo.core.twig.coretiwgextension:
+      class: InvEO\CoreBundle\Twig\CoreTwigExtension
+      public: false
+      tags:
+          - { name: twig.extension }

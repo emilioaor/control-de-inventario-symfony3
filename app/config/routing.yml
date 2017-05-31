@@ -1,0 +1,19 @@
+inventory_movement:
+    resource: "@InventoryMovementBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+client_and_supplier:
+    resource: "@ClientAndSupplierBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+product:
+    resource: "@ProductBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+core:
+    resource: "@CoreBundle/Controller/"
+    type:     annotation
+    prefix:   /

@@ -1,0 +1,87 @@
+<?php
+
+namespace InvEO\InventoryMovementBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+use InvEO\CoreBundle\Entity\BaseEntity;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * InventoryMovement
+ *
+ * @ORM\Table(name="inventory_movement")
+ * @ORM\Entity(repositoryClass="InvEO\InventoryMovementBundle\Repository\InventoryMovementRepository")
+ * @author Emilio Ochoa http://emilioochoa.com.ve
+ */
+class InventoryMovement extends BaseEntity
+{
+    /** Movements types  */
+    const TYPE_INPUT = 'TypeInput';
+    const TYPE_OUTPUT = 'TypeOutput';
+    /** Masks */
+    const INPUT_MASK = '{ENT}{000000}';
+    const OUTPUT_MASK = '{SAL}{000000}';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="code", type="string", length=20, unique=true)
+     */
+    private $code;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateIssue", type="datetime", nullable=true)
+     */
+    private $dateIssue;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=20)
+     */
+    private $type;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="status", type="integer")
+     */
+    private $status;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="fk_client_and_supplier", type="integer")
+     */
+    private $fkClientAndSupplier;
+
+    /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="InvEO\ClientAndSupplierBundle\Entity\ClientAndSupplier", inversedBy="inventoryMovements")
+     * @ORM\JoinColumn(name="fk_client_and_supplier", referencedColumnName="id")
+     */
+    private $clientAndSupplier;
+
+    /**
+     * @var ArrayCollection<InvEO\InventoryMovementBundle\Entity\Detail\InventoryMovementDetail>
+     *
+     * @ORM\OneToMany(targetEntity="InvEO\InventoryMovementBundle\Entity\Detail\InventoryMovementDetail", mappedBy="inventoryMovement")
+     */
+    private $details;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->details = new ArrayCollection();
+    }
+
+
+
+
+}

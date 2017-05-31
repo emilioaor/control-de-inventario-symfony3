@@ -1,0 +1,20 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block form_label %}
+    {{ parent() }}
+{% endblock %}
+
+{% block number_widget %}
+    {% set attr = {class : 'form-control'} %}
+    {{ parent() }}
+{% endblock %}
+
+{% block form_widget %}
+    {% set attr = {class : 'form-control'} %}
+    {{ parent() }}
+{% endblock %}
+
+{% block textarea_widget %}
+    {% set attr = {class : 'form-control'} %}
+    {{ parent() }}
+{% endblock %}

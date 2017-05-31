@@ -1,0 +1,10 @@
+//TODO Paginador para summary
+//TODO buscador en el summary
+//TODO Mostrar status de movimiento de inventario en summary de entradas y salidas
+//TODO firewall para las solicitudes
+//TODO autenticacion de usuario
+//TODO graficos para el dashboard
+//TODO mascaras para los input
+//TODO Notificar cuando se quiera superar el status maximo
+//TODO Noticifar por correo cuando se este por debajo del stock minimo
+//TODO Chequear las validaciones de formulario

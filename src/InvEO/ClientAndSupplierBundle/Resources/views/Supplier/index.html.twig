@@ -1,0 +1,39 @@
+{% extends 'CoreBundle:Templates:base.html.twig' %}
+
+{% block title %}Lista de proveedores{% endblock %}
+
+{% block titleMain %}Lista de proveedores{% endblock %}
+
+{% block position %}
+
+    {% include 'CoreBundle:Templates:position.html.twig' with {
+    positions : [
+            {
+                title : 'Proveedores',
+                route : '',
+                icon  : icon.ICON_SUPPLIER
+            }
+        ]
+    } %}
+
+{% endblock %}
+
+{% block body %}
+
+    {% include 'CoreBundle:Templates:summary.html.twig' with {
+        data : suppliers,
+        editButton : {
+            icon : icon.ICON_EDIT,
+            route : 'supplier.edit'
+        },
+        showButton : {
+            icon : icon.ICON_SEARCH,
+            route : 'supplier.show'
+        },
+        fields : [
+            {label : 'Código', key : 'code'},
+            {label : 'Rif', key : 'rif'},
+            {label : 'Nombre', key : 'name'}
+        ]
+    } %}
+{% endblock %}

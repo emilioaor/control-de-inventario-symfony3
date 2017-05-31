@@ -1,0 +1,88 @@
+{% extends 'CoreBundle:Templates:base.html.twig' %}
+
+{% block title %}Registrar proveedor{% endblock %}
+
+{% block titleMain %}Registrar proveedor{% endblock %}
+
+{% block position %}
+
+    {% include 'CoreBundle:Templates:position.html.twig' with {
+        positions : [
+            {
+                title : 'Proveedores',
+                route : 'supplier.index',
+                icon  : icon.ICON_SUPPLIER
+            },
+            {
+                title : 'Registrar proveedor',
+                route : '',
+                icon  : icon.ICON_SUPPLIER
+            }
+        ]
+    } %}
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+
+        <div class="col-xs-12">
+            {{ form_errors(form.rif) }}
+            {{ form_errors(form.name) }}
+            {{ form_errors(form.phone) }}
+            {{ form_errors(form.mobile) }}
+            {{ form_errors(form.address) }}
+        </div>
+
+    </div>
+
+    {{ form_start(form) }}
+
+    <div class="row">
+
+        <div class="col-sm-4 form-group">
+            <label for="">Código</label>
+            <p>-------------</p>
+        </div>
+
+        <div class="col-sm-4 form-group">
+            {{ form_label(form.rif) }}
+            {{ form_widget(form.rif) }}
+        </div>
+
+        <div class="col-sm-4 form-group">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-4 form-group">
+            {{ form_label(form.phone) }}
+            {{ form_widget(form.phone) }}
+        </div>
+
+        <div class="col-sm-4 form-group">
+            {{ form_label(form.mobile) }}
+            {{ form_widget(form.mobile) }}
+        </div>
+
+        <div class="col-sm-4 form-group">
+            {{ form_label(form.address) }}
+            {{ form_widget(form.address) }}
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 form-group">
+            <button class="btn btn-success"><span class="{{ icon.ICON_SAVE }}"></span> Registrar</button>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+
+{% endblock %}

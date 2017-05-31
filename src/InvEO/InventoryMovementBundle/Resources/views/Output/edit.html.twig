@@ -1,0 +1,149 @@
+{% extends 'CoreBundle:Templates:base.html.twig' %}
+
+{% block title %}Editar salida{% endblock %}
+
+{% block titleMain %}Editar salida{% endblock %}
+
+{% block position %}
+
+    {% include 'CoreBundle:Templates:position.html.twig' with {
+        positions : [
+            {
+                title : 'Salidas',
+                route : 'output.index',
+                icon  : icon.ICON_OUTPUT
+            },
+            {
+                title : 'Editar salida',
+                route : '',
+                icon  : icon.ICON_OUTPUT
+            }
+        ]
+    } %}
+
+{% endblock %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+
+        <div class="row">
+
+            <div class="col-sm-4">
+                <label>Código</label>
+                <p>{{ output.code }}</p>
+            </div>
+
+            <div class="col-sm-4">
+                {{ form_label(form.dateIssue) }}
+                {{ form_widget(form.dateIssue) }}
+                {{ form_errors(form.dateIssue) }}
+            </div>
+
+            <div class="col-sm-4">
+                {{ form_label(form.fkClientAndSupplier) }}
+                {{ form_widget(form.fkClientAndSupplier) }}
+                {{ form_errors(form.fkClientAndSupplier) }}
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-12">
+
+                <!-- TODO pasar a FormType -->
+                <hr>
+                <label>Detalle de salida</label>
+                <table class="table table-responsive table-striped">
+                    <thead>
+                        <tr>
+                            <th width="25%">Producto</th>
+                            <th width="25%">Cantidad</th>
+                            <th width="25%">Costo</th>
+                            <th width="25%">Subtotal</th>
+                            <th><button type="button" class="btn btn-success" onclick="addDetail()"><span class="{{ icon.ICON_ADD }}"></span></button></th>
+                        </tr>
+                    </thead>
+                    <tbody id="spaceDetail">
+
+                        {% for key, detail in output.details %}
+                            <tr id="row{{ key }}">
+                                <td>
+                                    <select name="detail[{{ key }}][productId]" class="form-control">
+                                        {% for product in products %}
+                                            <option value="{{ product.id }}" {{ product.id == detail.product.id ? 'selected="selected"' : '' }}>
+                                                {{ product.name }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                                <td><input type="text" id="textQuantity{{ key }}" onkeyup="calculateTotal({{ key }})" name="detail[{{ key }}][quantity]" class="form-control" value="{{ detail.quantity }}"></td>
+                                <td><input type="text" id="textCost{{ key }}" onkeyup="calculateTotal({{ key }})" name="detail[{{ key }}][cost]" class="form-control" value="{{ detail.cost }}"></td>
+                                <td><input type="text" id="textTotal{{ key }}" name="detail[{{ key }}][total]" class="form-control" value="{{ detail.total }}" disabled></td>
+                                <td><button type="button" class="btn btn-danger" onclick="removeDetail({{ key }})"><span class="{{ icon.ICON_REMOVE }}"></span></button></td>
+                            </tr>
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <button class="btn btn-success"><span class="{{ icon.ICON_SAVE }}"></span> Registrar</button>
+                <a href="{{ url('output.show', {id : output.id}) }}" class="btn btn-primary"><span class="{{ icon.ICON_OUTPUT }}"></span> Ver salida</a>
+                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#validateModal" {{ output.details|length == 0 ? 'disabled' : '' }}><span class="{{ icon.ICON_VALIDATE }}"></span> Validar movimiento</button>
+            </div>
+        </div>
+
+    {{ form_end(form) }}
+
+    <!-- Modal -->
+    <div id="validateModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Atención <span class="{{ icon.ICON_EXCLAMATION }}"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <p>Una vez validado el movimiento se aplicarán las acciones dentro del inventario, verifique cuidadosamente antes de continuar. ¿Desea validar el movimiento?</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="{{ path('output.validate', {id : output.id}) }}" class="btn btn-success" >Si</a>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block js %}
+    <script src="{{ asset('assetics/js/detailController.js') }}"></script>
+    <script>
+        var products = [];
+
+        {% for product in products %}
+            products.push({
+                id : {{ product.id }},
+                name : '{{ product.name }}'
+            });
+        {% endfor %}
+
+        initDetail({
+            products : products,
+            lastDetail : {{ output.details|length }},
+            iconRemove : '{{ icon.ICON_CANCEL }}'
+        });
+    </script>
+{% endblock %}

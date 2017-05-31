@@ -1,0 +1,34 @@
+<ul>
+    <!-- Collapse Primary -->
+    <li class="primary-collapse"><a href="{{ url('core.index') }}"><span class="{{ icon.ICON_HOME }}"></span> Dashboard</a></li>
+
+    <!-- Collapse Primary -->
+    <li class="primary-collapse"><button class="btn-collapse" data-toggle="collapse" data-target=".cProducts"><span class="{{ icon.ICON_PRODUCT }}"></span> Productos</button></li>
+        <!-- Collapse Item -->
+        <li class="collapse collapse-item cProducts"><span class="{{ icon.ICON_RIGHT }}"></span> <a href="{{ url('product.create') }}">Registrar</a></li>
+        <li class="collapse collapse-item cProducts"><span class="{{ icon.ICON_RIGHT }}"></span> <a href="{{ url('product.index') }}">Resumen</a></li>
+
+    <!-- Collapse Primary -->
+    <li class="primary-collapse"><button class="btn-collapse" data-toggle="collapse" data-target=".cClient"><span class="{{ icon.ICON_CLIENT }}"></span> Clientes</button></li>
+        <!-- Collapse Item -->
+        <li class="collapse collapse-item cClient"><span class="{{ icon.ICON_RIGHT }}"></span> <a href="{{ url('client.create') }}">Registrar</a></li>
+        <li class="collapse collapse-item cClient"><span class="{{ icon.ICON_RIGHT }}"></span> <a href="{{ url('client.index') }}">Resumen</a></li>
+
+    <!-- Collapse Primary -->
+    <li class="primary-collapse"><button class="btn-collapse" data-toggle="collapse" data-target=".cSupplier"><span class="{{ icon.ICON_SUPPLIER }}"></span> Proveedores</button></li>
+        <!-- Collapse Item -->
+        <li class="collapse collapse-item cSupplier"><span class="{{ icon.ICON_RIGHT }}"></span> <a href="{{ url('supplier.create') }}">Registrar</a></li>
+        <li class="collapse collapse-item cSupplier"><span class="{{ icon.ICON_RIGHT }}"></span> <a href="{{ url('supplier.index') }}">Resumen</a></li>
+
+    <!-- Collapse Primary -->
+    <li class="primary-collapse"><button class="btn-collapse" data-toggle="collapse" data-target=".cInput"><span class="{{ icon.ICON_INPUT }}"></span> Entradas</button></li>
+        <!-- Collapse Item -->
+        <li class="collapse collapse-item cInput"><span class="{{ icon.ICON_RIGHT }}"></span> <a href="{{ url('input.create') }}">Registrar</a></li>
+        <li class="collapse collapse-item cInput"><span class="{{ icon.ICON_RIGHT }}"></span> <a href="{{ url('input.index') }}">Resumen</a></li>
+
+    <!-- Collapse Primary -->
+    <li class="primary-collapse"><button class="btn-collapse" data-toggle="collapse" data-target=".cOutput"><span class="{{ icon.ICON_OUTPUT }}"></span> Salidas</button></li>
+        <!-- Collapse Item -->
+        <li class="collapse collapse-item cOutput"><span class="{{ icon.ICON_RIGHT }}"></span> <a href="{{ url('output.create') }}">Registrar</a></li>
+        <li class="collapse collapse-item cOutput"><span class="{{ icon.ICON_RIGHT }}"></span> <a href="{{ url('output.index') }}">Resumen</a></li>
+</ul>

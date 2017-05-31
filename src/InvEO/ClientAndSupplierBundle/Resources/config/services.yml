@@ -1,0 +1,4 @@
+services:
+#    client_and_supplier.example:
+#        class: InvEO\ClientAndSupplierBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

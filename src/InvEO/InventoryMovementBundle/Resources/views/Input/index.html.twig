@@ -1,0 +1,43 @@
+{% extends 'CoreBundle:Templates:base.html.twig' %}
+
+{% block title %}Lista de entradas{% endblock %}
+
+{% block titleMain %}Lista de entradas{% endblock %}
+
+{% block position %}
+
+    {% include 'CoreBundle:Templates:position.html.twig' with {
+    positions : [
+        {
+            title : 'Entradas',
+            route : '',
+            icon  : icon.ICON_INPUT
+        }
+    ]
+    } %}
+
+{% endblock %}
+
+{% block body %}
+
+    {% include 'CoreBundle:Templates:summary.html.twig' with {
+        data : inputs,
+        editButton : {
+            icon : icon.ICON_EDIT,
+            route : 'input.edit',
+            hide : {
+                property : 'status',
+                value : 1
+            }
+        },
+        showButton : {
+            icon : icon.ICON_SEARCH,
+            route : 'input.show'
+        },
+        fields : [
+            {label : 'Código', key : 'code'},
+            {label : 'Fecha', key : 'dateIssue'},
+            {label : 'Proveedor', key : 'supplierName'},
+        ]
+    } %}
+{% endblock %}
